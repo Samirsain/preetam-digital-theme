@@ -52,7 +52,7 @@
         "c1": {
           "type": "category",
           "settings": {
-            "collection": "ebooks",
+            "collection": "e-books",
             "title": "E-books",
             "description": "In-depth reads you can apply right away.",
             "artwork": "ebooks"
