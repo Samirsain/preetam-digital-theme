@@ -119,7 +119,7 @@
           "settings": {
             "heading": "Which currency are prices in?",
             "icon": "price_tag",
-            "row_content": "<p>Prices are shown in Indian Rupees (INR). If your card is in another currency, your bank converts the amount and may charge a conversion fee.</p>"
+            "row_content": "<p>Prices are shown in US Dollars (USD). If your card is in another currency, including Indian Rupees, your bank converts the amount and may charge a conversion fee.</p>"
           }
         },
         "row_3": {
