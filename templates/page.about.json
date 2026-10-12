@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 16
+      }
+    },
+    "values": {
+      "type": "feature-grid",
+      "blocks": {
+        "v1": {
+          "type": "feature",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Useful first",
+            "text": "We create resources you can put to work the same day."
+          }
+        },
+        "v2": {
+          "type": "feature",
+          "settings": {
+            "icon": "book",
+            "title": "Clear and simple",
+            "text": "Plain language, clean layouts and no filler."
+          }
+        },
+        "v3": {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "Here to help",
+            "text": "Questions about a file or an order? We reply personally."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "What we care about",
+        "heading_size": "h2",
+        "text": "",
+        "columns_desktop": "3",
+        "color_scheme": "scheme-2",
+        "card_color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "heading": "Find your next resource",
+            "heading_size": "h2"
+          }
+        },
+        "b": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop all products",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "Contact us",
+            "button_link_2": "shopify://pages/contact",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "b"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "values",
+    "cta"
+  ]
+}

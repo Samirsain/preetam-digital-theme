@@ -1,0 +1,180 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "steps": {
+      "type": "process-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "icon": "check",
+            "title": "Complete checkout",
+            "text": "Pay for your order. Your download link appears on the confirmation page."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "icon": "mail",
+            "title": "Check your email",
+            "text": "We also email the link to the address you used at checkout."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "icon": "download",
+            "title": "Download the files",
+            "text": "Open the link and save each file to your device."
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "icon": "play",
+            "title": "Open and use",
+            "text": "Open PDFs in any PDF reader, or print them at home."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "heading": "Getting your files",
+        "heading_size": "h2",
+        "text": "",
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-2",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "trouble": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "I can't find my order email",
+            "icon": "question_mark",
+            "row_content": "<p>Search your inbox for your order number, then check spam, promotions and updates folders. Make sure the email address on your order is correct. Still missing? Contact us with your order number.</p>"
+          }
+        },
+        "row_2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "The download link doesn't open",
+            "icon": "eye",
+            "row_content": "<p>Copy the link and paste it into a different browser, or try another device. Some in-app browsers (for example inside social media apps) block downloads \u2014 open the link in Chrome or Safari instead.</p>"
+          }
+        },
+        "row_3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "The file won't open on my phone",
+            "icon": "clipboard",
+            "row_content": "<p>Install or update a PDF reader, then open the file from your Downloads folder. On iPhone, look in the Files app under Downloads.</p>"
+          }
+        },
+        "row_4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "The file looks damaged or incomplete",
+            "icon": "return",
+            "row_content": "<p>Delete the file and download it again over a stable connection. If it's still damaged, contact us and we'll send a working copy or refund you as described in our refund policy.</p>"
+          }
+        },
+        "row_5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "My link has expired",
+            "icon": "lightning_bolt",
+            "row_content": "<p>Contact us with your order number and we'll send you a new link.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Troubleshooting",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 40
+      }
+    },
+    "contact": {
+      "type": "contact-details",
+      "blocks": {
+        "e": {
+          "type": "detail",
+          "settings": {
+            "icon": "mail",
+            "label": "Email",
+            "value": "preetamgodara0777@gmail.com",
+            "link_type": "email"
+          }
+        },
+        "p": {
+          "type": "detail",
+          "settings": {
+            "icon": "phone",
+            "label": "Phone",
+            "value": "+91 93519 02870",
+            "link_type": "phone"
+          }
+        },
+        "a": {
+          "type": "detail",
+          "settings": {
+            "icon": "pin",
+            "label": "Address",
+            "value": "Ward No. 01, Khedasari, Rawatsar\nHanumangarh, Rajasthan 335524, India",
+            "link_type": "none"
+          }
+        }
+      },
+      "block_order": [
+        "e",
+        "p",
+        "a"
+      ],
+      "settings": {
+        "heading": "Need more help?",
+        "text": "Send us your order number and a short description of the problem.",
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "steps",
+    "trouble",
+    "contact"
+  ]
+}

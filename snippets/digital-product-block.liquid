@@ -1,0 +1,118 @@
+{% comment %}
+  Renders the digital-product blocks on the product page.
+  Reads optional product metafields in the "custom" namespace:
+  value_proposition, file_format, file_size, page_count, language,
+  compatibility, whats_included (list), sample_file (file), license_type.
+  Every block renders nothing when its data is missing.
+
+  Accepts:
+  - block: {Object} The section block
+  - product: {Object} The product
+
+  Usage:
+  {% render 'digital-product-block', block: block, product: product %}
+{% endcomment %}
+{%- liquid
+  assign mf = product.metafields.custom
+  assign variant = product.selected_or_first_available_variant
+-%}
+
+{%- case block.type -%}
+  {%- when 'digital_badges' -%}
+    <div class="ds-product-badges" {{ block.shopify_attributes }}>
+      {%- unless variant.requires_shipping -%}
+        <span class="ds-pill">{%- render 'digital-icon', icon: 'download' -%}{{ block.settings.digital_label | escape }}</span>
+      {%- endunless -%}
+      {%- if block.settings.show_type and product.type != blank -%}
+        <span class="ds-pill ds-pill--neutral">{{ product.type | escape }}</span>
+      {%- endif -%}
+      {%- if mf.file_format != blank -%}
+        <span class="ds-pill ds-pill--neutral">{{ mf.file_format.value | escape }}</span>
+      {%- endif -%}
+    </div>
+
+  {%- when 'value_proposition' -%}
+    {%- if mf.value_proposition != blank -%}
+      <p class="ds-value-prop" {{ block.shopify_attributes }}>{{ mf.value_proposition.value | escape }}</p>
+    {%- endif -%}
+
+  {%- when 'file_specs' -%}
+    {%- if mf.file_format != blank or mf.file_size != blank or mf.page_count != blank or mf.language != blank or mf.compatibility != blank or mf.license_type != blank -%}
+      <ul class="ds-specs" role="list" {{ block.shopify_attributes }}>
+        {%- if mf.file_format != blank -%}
+          <li class="ds-specs__item">
+            {%- render 'digital-icon', icon: 'file' -%}
+            <span><span class="ds-specs__label">Format</span><span class="ds-specs__value">{{ mf.file_format.value | escape }}</span></span>
+          </li>
+        {%- endif -%}
+        {%- if mf.page_count != blank -%}
+          <li class="ds-specs__item">
+            {%- render 'digital-icon', icon: 'pages' -%}
+            <span><span class="ds-specs__label">Length</span><span class="ds-specs__value">{{ mf.page_count.value }} pages</span></span>
+          </li>
+        {%- endif -%}
+        {%- if mf.file_size != blank -%}
+          <li class="ds-specs__item">
+            {%- render 'digital-icon', icon: 'download' -%}
+            <span><span class="ds-specs__label">File size</span><span class="ds-specs__value">{{ mf.file_size.value | escape }}</span></span>
+          </li>
+        {%- endif -%}
+        {%- if mf.language != blank -%}
+          <li class="ds-specs__item">
+            {%- render 'digital-icon', icon: 'language' -%}
+            <span><span class="ds-specs__label">Language</span><span class="ds-specs__value">{{ mf.language.value | escape }}</span></span>
+          </li>
+        {%- endif -%}
+        {%- if mf.compatibility != blank -%}
+          <li class="ds-specs__item">
+            {%- render 'digital-icon', icon: 'device' -%}
+            <span><span class="ds-specs__label">Works with</span><span class="ds-specs__value">{{ mf.compatibility.value | escape }}</span></span>
+          </li>
+        {%- endif -%}
+        {%- if mf.license_type != blank -%}
+          <li class="ds-specs__item">
+            {%- render 'digital-icon', icon: 'license' -%}
+            <span><span class="ds-specs__label">License</span><span class="ds-specs__value">{{ mf.license_type.value | escape }}</span></span>
+          </li>
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
+
+  {%- when 'whats_included' -%}
+    {%- if mf.whats_included != blank -%}
+      <div class="ds-included" {{ block.shopify_attributes }}>
+        <h2 class="ds-included__title">{{ block.settings.heading | escape }}</h2>
+        <ul role="list">
+          {%- for item in mf.whats_included.value -%}
+            <li>{%- render 'digital-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+  {%- when 'sample_download' -%}
+    {%- if mf.sample_file != blank -%}
+      {%- assign sample = mf.sample_file.value -%}
+      {%- assign sample_url = sample.url | default: sample.preview_image.src -%}
+      {%- if sample_url != blank -%}
+        <a
+          class="ds-sample-link"
+          href="{{ sample_url }}"
+          target="_blank"
+          rel="noopener"
+          {{ block.shopify_attributes }}
+        >
+          {%- render 'digital-icon', icon: 'file' -%}
+          {{ block.settings.label | escape }}
+        </a>
+      {%- endif -%}
+    {%- endif -%}
+
+  {%- when 'delivery_note' -%}
+    {%- unless variant.requires_shipping -%}
+      <div class="ds-delivery-note rte" {{ block.shopify_attributes }}>
+        {%- render 'digital-icon', icon: 'zap' -%}
+        <div>{{ block.settings.text }}</div>
+      </div>
+    {%- endunless -%}
+{%- endcase -%}

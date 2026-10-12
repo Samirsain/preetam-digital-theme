@@ -1,0 +1,203 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.6 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign tile_count = section.blocks.size
+  if tile_count >= 5
+    assign grid_class = 'ds-tiles--5'
+  elsif tile_count == 4
+    assign grid_class = 'ds-tiles--4'
+  endif
+-%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="ds-section-head">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p>{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul class="ds-tiles {{ grid_class }}" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tile_collection = block.settings.collection
+          assign tile_title = block.settings.title | default: tile_collection.title
+          assign tile_url = tile_collection.url | default: block.settings.link | default: routes.all_products_collection_url
+        -%}
+        <li {{ block.shopify_attributes }}>
+          <a class="ds-tile" href="{{ tile_url }}">
+            <div class="ds-tile__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 720
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 20vw, (min-width: 750px) 33vw, 50vw',
+                    widths: '240, 360, 480, 720',
+                    alt: ''
+                }}
+              {%- else -%}
+                <img
+                  src="{{ block.settings.artwork | prepend: 'pa-category-' | append: '.webp' | asset_url }}"
+                  alt=""
+                  width="960"
+                  height="720"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </div>
+            <div class="ds-tile__body">
+              <h3 class="ds-tile__title">
+                <span>{{ tile_title | escape }}</span>
+                {%- render 'digital-icon', icon: 'arrow-right' -%}
+              </h3>
+              {%- if block.settings.description != blank -%}
+                <p class="ds-tile__text">{{ block.settings.description | escape }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Category tiles",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Subheading",
+      "default": "Find the right resource for what you are working on."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "Defaults to the collection title."
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Used only when no collection is selected."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended 4:3. Leave empty to use bundled artwork."
+        },
+        {
+          "type": "select",
+          "id": "artwork",
+          "label": "Bundled artwork",
+          "options": [
+            { "value": "ebooks", "label": "E-books" },
+            { "value": "guides", "label": "PDF guides" },
+            { "value": "templates", "label": "Templates" },
+            { "value": "planners", "label": "Planners" },
+            { "value": "business", "label": "Business resources" },
+            { "value": "checklists", "label": "Checklists" }
+          ],
+          "default": "ebooks"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category tiles",
+      "blocks": [
+        { "type": "category", "settings": { "title": "E-books", "artwork": "ebooks" } },
+        { "type": "category", "settings": { "title": "PDF Guides", "artwork": "guides" } },
+        { "type": "category", "settings": { "title": "Templates", "artwork": "templates" } },
+        { "type": "category", "settings": { "title": "Planners", "artwork": "planners" } },
+        { "type": "category", "settings": { "title": "Business Resources", "artwork": "business" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

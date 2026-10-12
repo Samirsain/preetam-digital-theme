@@ -1,0 +1,12 @@
+{% comment %}
+  Renders the bundled Preetam Advertising logo when no logo is uploaded in
+  theme settings. Upload a logo under Theme settings > Logo to override it.
+{% endcomment %}
+{%- assign fallback_width = settings.logo_width | default: 160 -%}
+<img
+  src="{{ 'pa-logo.png' | asset_url }}"
+  alt="{{ shop.name | escape }}"
+  width="{{ fallback_width }}"
+  height="{{ fallback_width | times: 150 | divided_by: 560 }}"
+  class="header__heading-logo motion-reduce"
+>

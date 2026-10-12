@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "contact": {
+      "type": "contact-details",
+      "blocks": {
+        "e": {
+          "type": "detail",
+          "settings": {
+            "icon": "mail",
+            "label": "Email",
+            "value": "preetamgodara0777@gmail.com",
+            "link_type": "email"
+          }
+        },
+        "p": {
+          "type": "detail",
+          "settings": {
+            "icon": "phone",
+            "label": "Phone",
+            "value": "+91 93519 02870",
+            "link_type": "phone"
+          }
+        },
+        "a": {
+          "type": "detail",
+          "settings": {
+            "icon": "pin",
+            "label": "Address",
+            "value": "Ward No. 01, Khedasari, Rawatsar\nHanumangarh, Rajasthan 335524, India",
+            "link_type": "none"
+          }
+        }
+      },
+      "block_order": [
+        "e",
+        "p",
+        "a"
+      ],
+      "settings": {
+        "heading": "Contact support",
+        "text": "Include your order number so we can help faster.",
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-2",
+        "padding_top": 32,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "contact"
+  ]
+}

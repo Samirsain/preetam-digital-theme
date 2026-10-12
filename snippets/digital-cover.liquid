@@ -1,0 +1,15 @@
+{% comment %}
+  Generated cover shown when a digital product has no image yet.
+  Upload a real cover image to the product to replace it.
+
+  Accepts:
+  - product: {Object} Product
+{% endcomment %}
+{%- assign cover_variant = product.id | modulo: 3 | plus: 1 -%}
+<div class="ds-cover ds-cover--{{ cover_variant }}" aria-hidden="true">
+  {%- if product.type != blank -%}
+    <span class="ds-cover__type">{{ product.type | escape }}</span>
+  {%- endif -%}
+  <span class="ds-cover__title">{{ product.title | escape }}</span>
+  <span class="ds-cover__rule"></span>
+</div>
